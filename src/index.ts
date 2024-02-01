@@ -1,10 +1,13 @@
-import express from "express";
 import ExpressAppBuilder from "./builders/express";
+import { fromEnvOrThrow } from "./utils/env";
+import ipaddress from "./utils/ipaddress";
 
 async function main() {
+    const port = +fromEnvOrThrow("PORT");
+    const address = ipaddress();
     const app = ExpressAppBuilder.builder().build();
 
-    app.listen();
+    app.listen(port, address);
 }
 
 main()
